@@ -11,3 +11,9 @@ Local.props
 
 # Packaged release zips
 dist/
+
+# Python (tools/il2cpp-re)
+__pycache__/
+.venv/
+venv/
+symcache.pkl

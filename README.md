@@ -102,6 +102,8 @@ Requirements: the [.NET SDK](https://dotnet.microsoft.com/download) (6.0 or newe
 2. Run `dotnet build -c Release`. The DLL is copied into the game's `BepInEx\plugins\SilverPines.SaveAnywhere\` automatically. Pass `-p:DeployToGame=false` to skip that step.
 3. Run `.\scripts\package.ps1` to create the release zips in `dist\`.
 
+See [AGENTS.md](AGENTS.md) for how the mod works internally, the game's relevant code, and the reverse-engineering scripts in `tools/il2cpp-re/`.
+
 ## License
 
 [MIT](LICENSE). Not affiliated with Wych Elm or Team17. BepInEx, which is included in the all-in-one download, is licensed under the [LGPL-2.1](https://github.com/BepInEx/BepInEx/blob/master/LICENSE).
