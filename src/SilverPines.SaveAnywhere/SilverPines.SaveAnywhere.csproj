@@ -1,0 +1,46 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    Builds against the game's interop assemblies, which BepInEx generates on first launch.
+    Set GameDir to your Silver Pines folder: either in Local.props next to the .sln
+    (git-ignored, see README) or with -p:GameDir="...".
+  -->
+  <Import Project="..\..\Local.props" Condition="Exists('..\..\Local.props')" />
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <AssemblyName>SilverPines.SaveAnywhere</AssemblyName>
+    <RootNamespace>SaveAnywhere</RootNamespace>
+    <Version>1.0.0</Version>
+    <LangVersion>latest</LangVersion>
+    <Nullable>disable</Nullable>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <CopyLocalLockFileAssemblies>false</CopyLocalLockFileAssemblies>
+    <CheckEolTargetFramework>false</CheckEolTargetFramework>
+    <DebugType>none</DebugType>
+    <GameDir Condition="'$(GameDir)' == ''">C:\Program Files (x86)\Steam\steamapps\common\Silver Pines</GameDir>
+    <BepInExDir>$(GameDir)\BepInEx</BepInExDir>
+    <PluginInstallDir>$(BepInExDir)\plugins\SilverPines.SaveAnywhere</PluginInstallDir>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="$(BepInExDir)\core\BepInEx.Core.dll" Private="false" />
+    <Reference Include="$(BepInExDir)\core\BepInEx.Unity.IL2CPP.dll" Private="false" />
+    <Reference Include="$(BepInExDir)\core\BepInEx.Unity.Common.dll" Private="false" />
+    <Reference Include="$(BepInExDir)\core\0Harmony.dll" Private="false" />
+    <Reference Include="$(BepInExDir)\core\Il2CppInterop.Runtime.dll" Private="false" />
+    <Reference Include="$(BepInExDir)\core\Il2CppInterop.Common.dll" Private="false" />
+    <Reference Include="$(BepInExDir)\interop\Il2Cppmscorlib.dll" Private="false" />
+    <Reference Include="$(BepInExDir)\interop\UnityEngine.dll" Private="false" />
+    <Reference Include="$(BepInExDir)\interop\UnityEngine.CoreModule.dll" Private="false" />
+    <Reference Include="$(BepInExDir)\interop\CarpenterScripts.dll" Private="false" />
+    <Reference Include="$(BepInExDir)\interop\PlayMaker.dll" Private="false" />
+  </ItemGroup>
+
+  <!-- Copy the built plugin into the game's BepInEx\plugins folder (skip with -p:DeployToGame=false). -->
+  <Target Name="DeployPlugin" AfterTargets="Build" Condition="'$(DeployToGame)' != 'false' And Exists('$(BepInExDir)\plugins')">
+    <Copy SourceFiles="$(TargetPath)" DestinationFolder="$(PluginInstallDir)" />
+    <Message Importance="high" Text="Deployed to $(PluginInstallDir)" />
+  </Target>
+
+</Project>

@@ -1,0 +1,13 @@
+bin/
+obj/
+.vs/
+.vscode/
+.idea/
+*.user
+*.suo
+
+# Machine-specific build settings (GameDir)
+Local.props
+
+# Packaged release zips
+dist/

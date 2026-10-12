@@ -1,0 +1,5 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/SilverPines.SaveAnywhere/SilverPines.SaveAnywhere.csproj" />
+  </Folder>
+</Solution>
